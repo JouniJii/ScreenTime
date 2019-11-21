@@ -38,7 +38,7 @@ public class IntentPalvelu extends IntentService {
 
             // Send all timestamps to main activity
             Intent dataIntent = new Intent();
-            dataIntent.setAction(MainActivity.ACTION_DATA_RECEIVER);
+            dataIntent.setAction(MainActivity.ACTION_GET_ALL_DATA);
             dataIntent.putExtra(EXTRA_KEY_OUT, itemEntities);
             sendBroadcast(dataIntent);
         }

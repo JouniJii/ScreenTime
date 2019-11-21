@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private DataReceiver dataReceiver;
     private Context context;
 
-    final static String ACTION_DATA_RECEIVER = "action_data_receiver";
+    final static String ACTION_GET_ALL_DATA = "action_data_receiver";
     final static String ACTION_UPDATE_LISTVIEW = "action_update_listview";
     final static String APP_STARTED_TEXT = "ScreenTime started";
     final static String APP_STOPPED_TEXT = "ScreenTime stopped";
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupDataReceiver() {
         dataReceiver = new DataReceiver();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(ACTION_DATA_RECEIVER);
+        intentFilter.addAction(ACTION_GET_ALL_DATA);
         intentFilter.addAction(ACTION_UPDATE_LISTVIEW);
         registerReceiver(dataReceiver, intentFilter);
     }
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
 
             // Received all data from IntentPalvelu
-            if (intent.getAction().equals(ACTION_DATA_RECEIVER)) {
+            if (intent.getAction().equals(ACTION_GET_ALL_DATA)) {
 
                 items = (ArrayList<ItemEntity>) intent.getSerializableExtra(IntentPalvelu.EXTRA_KEY_OUT);
                 if (items != null) {
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             else if (intent.getAction().equals(ACTION_UPDATE_LISTVIEW)) {
                 ItemEntity itemEntity = (ItemEntity) intent.getSerializableExtra(IntentPalvelu.EXTRA_KEY_OUT);
 
-                adapter.add(itemEntity);
+                adapter.insert(itemEntity, 0);
                 adapter.notifyDataSetChanged();
             }
         }

@@ -12,6 +12,6 @@ public interface ItemDao {
     @Insert
     void insertItem (ItemEntity itemEntity);
 
-    @Query("SELECT * FROM ItemEntity")
+    @Query("SELECT * FROM ItemEntity ORDER BY id DESC")
     List<ItemEntity> getAllItems();
 }
